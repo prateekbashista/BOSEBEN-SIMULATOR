@@ -2,6 +2,28 @@
 #include "decode_riscv32im.h"
 #include <cstdint>
 
+class CPU
+{   
+    REG PC;
+
+    // REG X0 - X31
+    REG X[32];
+
+    BYTE N : 1; // NEGATIVE FLAG
+    BYTE Z : 1; // ZERO FLAG
+    BYTE P : 1; // POSITIVE FLAG
+
+    public:
+    void reset()
+    {
+        PC = 0;
+        N = 0;
+        P = 0;
+        Z = 0;
+        //X[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,};
+    }
+};
+
 struct decode_out{
     BYTE r1_sel;
     BYTE r1_re; 
@@ -20,10 +42,11 @@ int main(int argc, char **argv)
 {
     decode_out dec1;
     WORD insn = 0x2B7; // add x0, x1, x0
-
+    
     decoder(insn, &dec1.r1_sel, &dec1.r1_re, &dec1.r2_sel, &dec1.r2_re, 
                 &dec1.wsel, &dec1.regfile_we, &dec1.is_load, &dec1.is_store, 
                 &dec1.is_branch, &dec1.is_control, &dec1.is_system);
+    
 
     std::cout<<"\n add x0, x1, x0";
     std::cout<<"\n R1_SEL : "<<static_cast<int>(dec1.r1_sel);
