@@ -7,7 +7,7 @@ class CPU
     REG PC;
 
     // REG X0 - X31
-    REG X[32];
+    REG X[32]; // Architectural Register File
 
     BYTE N : 1; // NEGATIVE FLAG
     BYTE Z : 1; // ZERO FLAG
