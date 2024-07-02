@@ -63,7 +63,7 @@ class ISSUE_QUEUE
             
             if(r1_re || r2_re)
             {
-                update_entry(&new_iq,r1_sel,r2_re,r2_sel, wsel, regfile_we);
+                update_entry(&new_iq,r1_re,r1_sel,r2_re,r2_sel, wsel, regfile_we);
             }
             tail->next = new_iq;
             tail = new_iq;
