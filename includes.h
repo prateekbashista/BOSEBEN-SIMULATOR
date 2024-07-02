@@ -65,3 +65,37 @@
 #define rs1_addr(insn) ((BYTE)((insn >> 15) & 0x1F))
 #define rs2_addr(insn) ((BYTE)((insn >> 20) & 0x1F))
 /**************************************************/
+
+int stall_rob;
+
+struct rob_entry{
+    uint64_t id;
+    REG PC;
+    BYTE opcode;
+    REG logical_reg;
+    REG previous_reg;
+    WORD VALUE;
+    BYTE exception : 1;
+    struct rob_entry *next;
+};
+
+int stall_iq;
+uint64_t issued_id; // New Id issued to a rob entry for dependency tracking
+
+struct iq_entry
+{
+    // BYTE busy : 1; Redundant with software implementation
+    REG dest_reg;
+    REG PC;
+    BYTE opcode;
+    uint64_t dest_rob_TAG;
+    uint64_t op1_TAG;
+    uint64_t op2_TAG;
+    WORD op_value1;
+    WORD op_value2;
+    BYTE wakeup1 : 1;
+    BYTE wakeup2 : 1;
+    struct iq_entry *next;
+};
+
+struct iq_entry *select;

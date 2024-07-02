@@ -3,27 +3,17 @@
 
 // The rob will be implemented using a queue.
 // The queue will be custom, and thus, it will be made up of rob_entry
-int stall_rob;
-
-struct rob_entry{
-    uint64_t id;
-    REG PC;
-    BYTE opcode;
-    REG logical_reg;
-    REG previous_reg;
-    WORD VALUE;
-    BYTE exception : 1;
-    struct rob_entry *next;
-};
 
 class ROB{
 
     rob_entry *head, *tail;
     int capacity;
     int current;
-    int new_id;
+    uint64_t new_id;
 
     public:
+
+
     ROB() : head(nullptr), tail(nullptr)
     {
         capacity = 1;
@@ -59,12 +49,14 @@ class ROB{
         {
             stall_rob = 1;
             delete new_entry;
+            new_id --;
         }
         else
         {   
             stall_rob = 0;
             tail->next  = new_entry;
             tail = new_entry;
+            issued_id = new_id;
             capacity++;
         }
     }
