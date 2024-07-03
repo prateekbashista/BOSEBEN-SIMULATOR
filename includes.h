@@ -99,3 +99,7 @@ struct iq_entry
 };
 
 struct iq_entry *select;
+int stall_lq; 
+int stall_sq;
+
+uint64_t lsq_age_cnt = 0;
