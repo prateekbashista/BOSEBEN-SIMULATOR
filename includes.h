@@ -1,3 +1,6 @@
+#ifndef _INCLUDES_
+#define _INCLUDES_
+
 #include "datatypes.h"
 
 /*************INSTRUCTION DECLARATION***********/
@@ -103,3 +106,5 @@ int stall_lq;
 int stall_sq;
 
 uint64_t lsq_age_cnt = 0;
+
+#endif

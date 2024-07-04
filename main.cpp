@@ -2,50 +2,76 @@
 #include "decode_riscv32im.h"
 #include <cstdint>
 
-class CPU
+
+struct CPU_STAGE
+{
+    // General Tempelate in for input of the all CPU STAGES
+
+    REG PC; // pc of the instruction being operated on
+    WORD insn;
+    BYTE opcode, funct3op, funct7op;
+    BYTE r1_re, r2_re; // Register Read Enable
+    BYTE r1_sel; // R1 Address
+    BYTE r2_sel; // R2 Address
+    BYTE regfile_we; // Write Enable
+    BYTE wsel;// Write Address
+    BYTE is_link; // Link address needed
+    BYTE link_reg; // Link register address
+
+    // Flags
+    BYTE is_load; // Is instruction a load
+    BYTE is_store; // Is intruction a store
+    BYTE is_branch; // Is instruction a branch
+    BYTE is_control; // Is instruction a control instruction like jump
+    BYTE is_system; // Is instruction from CSR, Priviledge mode support
+
+};
+
+struct MEMORY
+{
+    WORD data_mem[4096];
+    WORD insn_mem[256];
+
+};
+
+struct CPU
 {   
     REG PC;
+
+
+    // Stages of the CPU
+    CPU_STAGE *fetch_op, *decode_op, *dispatch_op, *issue_op, *memory_op, *commit_op; 
 
     // REG X0 - X31
     REG X[32]; // Architectural Register File
 
+    BYTE O : 1; // OVERFLOW FLAG
     BYTE N : 1; // NEGATIVE FLAG
     BYTE Z : 1; // ZERO FLAG
     BYTE P : 1; // POSITIVE FLAG
 
-    public:
     void reset()
     {
         PC = 0;
         N = 0;
         P = 0;
         Z = 0;
-        //X[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,};
+        
+        for(int i = 0; i<32; i++)
+        {
+            X[i] = 0;
+        } //Reg Reset
+
+        fetch_op = decode_op = dispatch_op = issue_op = memory_op = commit_op = nullptr;
     }
 };
 
-struct decode_out{
-    BYTE r1_sel;
-    BYTE r1_re; 
-    BYTE r2_sel; 
-    BYTE r2_re; 
-    BYTE wsel; 
-    BYTE regfile_we; 
-    BYTE is_load; 
-    BYTE is_store; 
-    BYTE is_branch; 
-    BYTE is_control;
-    BYTE is_system;
-};
+
+
 
 int main(int argc, char **argv)
 {
-    decode_out dec1;
-    WORD insn = 0x2B7; // add x0, x1, x0
-    
-    decoder(insn, &dec1.r1_sel, &dec1.r1_re, &dec1.r2_sel, &dec1.r2_re, 
-                &dec1.wsel, &dec1.regfile_we, &dec1.is_load, &dec1.is_store, 
-                &dec1.is_branch, &dec1.is_control, &dec1.is_system);
+
     
 
     std::cout<<"\n add x0, x1, x0";
