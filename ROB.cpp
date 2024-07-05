@@ -28,11 +28,17 @@ class ROB{
         new_id = 0;
         stall_rob = 0;
     }
+
+    struct rob_entry* peek_head()
+    {
+        return head;
+    }
     void add_to_rob(REG PC, BYTE opcode, REG logical_reg, REG previous_reg, REG VALUE)
     {
         struct rob_entry *new_entry = new struct rob_entry;
         new_id++;
         new_entry->id = new_id;
+        new_entry->complete = 0;
         new_entry->PC = PC;
         new_entry->opcode = opcode;
         new_entry->logical_reg = logical_reg;
@@ -88,6 +94,7 @@ class ROB{
             if(iter->PC == PC)
             {
                 iter->VALUE = VALUE;
+                iter->complete = 1;
                 break;
             }
             iter = iter->next;

@@ -77,17 +77,20 @@ class LOAD_QUEUE
             iter = iter->next;
         }
     }
-    struct lq_entry* search_sq (struct sq_entry **sq_head)
-    {
-        struct sq_entry *iter  = *sq_head; 
 
-        if(iter->age > head->age)
+    bool older_store(struct sq_entry **sq_head)
+    {
+        struct sq_entry *search = *sq_head;
+
+        while(search->age < head->age)
         {
-            struct lq_entry *header = head;
-            head = head->next;
-            return header;
+            if(search->st_address == -1)
+            {
+                return 1;
+            }
+            search = search->next;
         }
-        return nullptr;
+        return 0;
     }
 
 
@@ -141,7 +144,17 @@ class STORE_QUEUE
     }
     void update_value(REG PC, WORD address)
     {
-        // placeholder
+        struct sq_entry *iter = head;
+
+        while(iter)
+        {
+            if(iter->PC == PC)
+            {
+                iter->st_address = address;
+                break;
+            }
+            iter = iter->next;
+        }
     }
 
 

@@ -1,5 +1,9 @@
 //#include "includes.h"
 #include "decode_riscv32im.h"
+#include "ROB.cpp"
+#include "Issue_Queue.cpp"
+#include "LSQ.cpp"
+#include "RMT.cpp"
 #include <cstdint>
 
 
@@ -12,12 +16,14 @@ struct CPU_STAGE
     BYTE opcode, funct3op, funct7op;
     BYTE r1_re, r2_re; // Register Read Enable
     BYTE r1_sel; // R1 Address
+    WORD r1_data; // R1 Data
     BYTE r2_sel; // R2 Address
+    WORD r2_data; // R2 Data 
     BYTE regfile_we; // Write Enable
     BYTE wsel;// Write Address
     BYTE is_link; // Link address needed
     BYTE link_reg; // Link register address
-
+    WORD output_alu; // computed value
     // Flags
     BYTE is_load; // Is instruction a load
     BYTE is_store; // Is intruction a store
@@ -40,7 +46,7 @@ struct CPU
 
 
     // Stages of the CPU
-    CPU_STAGE *fetch_op, *decode_op, *dispatch_op, *issue_op, *memory_op, *commit_op; 
+    struct CPU_STAGE *fetch_op, *decode_op, *dispatch_op, *issue_op, *integer_op, *memory_op, *commit_op; 
 
     // REG X0 - X31
     REG X[32]; // Architectural Register File
@@ -62,29 +68,93 @@ struct CPU
             X[i] = 0;
         } //Reg Reset
 
-        fetch_op = decode_op = dispatch_op = issue_op = memory_op = commit_op = nullptr;
+        fetch_op = decode_op = dispatch_op = issue_op = integer_op = memory_op = commit_op = nullptr;
     }
 };
 
+// Declaration of Datastructures of CPU
+struct CPU cpu;
+struct MEMORY mem;
+ROB rob(32);
+ISSUE_QUEUE iq_int(8);
+ISSUE_QUEUE iq_mem(4);
+LOAD_QUEUE lq(4);
+STORE_QUEUE sq(4);
+RMT rmt;
 
+
+void retire()
+{
+    // Nothing to commit
+    if(rob.peek_head() == nullptr)
+        return;
+
+    struct rob_entry *temp = rob.peek_head();
+
+    if(temp->complete == 1)
+    {
+        temp = rob.commit_from_rob();
+
+        if(temp->opcode == STORE)
+        {
+            mem.data_mem[cpu.X[temp->logical_reg]] = temp->VALUE; // Wrong right now
+        }
+        else
+        {
+            cpu.X[temp->logical_reg] = temp->VALUE;    
+        }
+    
+        delete temp;
+    }
+}
+
+void commit()
+{
+    CPU_STAGE *work_commit = cpu.commit_op;
+
+    if(work_commit->opcode == LOAD)
+    {
+        lq.update_value(work_commit->PC, work_commit->output_alu); // LQ will write the value to the ROB, so kind of like retire
+
+        // Search Store---------> if older store don't execute, if same address and value there , use the value
+    }
+    else if(work_commit->opcode == STORE)
+    {
+        sq.update_value(work_commit->PC, work_commit->output_alu); // Store will search regfile or ROB till it's instruction to ask for value.
+    }
+    else
+    {
+        rob.retire_value(work_commit->PC, work_commit->output_alu); // Normal write back to ROB instead now.
+    }
+
+    cpu.commit_op = nullptr;
+    
+}
+void memory()
+{
+    if(cpu.memory_op == nullptr)
+        return;
+    CPU_STAGE *work_commit = cpu.memory_op;
+
+    if(work_commit->opcode == LOAD)
+    {
+        if(!stall_lq)
+            lq.add_to_lq(work_commit->PC, work_commit->wsel, work_commit->r1_re,work_commit->r1_sel);
+    }
+    else if (work_commit->opcode == STORE)
+    {
+        if(!stall_sq)
+            sq.add_to_sq(work_commit->PC,work_commit->r1_re,work_commit->r1_sel, work_commit->r2_re,work_commit->r2_sel);
+    }
+
+    cpu.commit_op = cpu.memory_op;
+
+}
 
 
 int main(int argc, char **argv)
 {
 
-    
 
-    std::cout<<"\n add x0, x1, x0";
-    std::cout<<"\n R1_SEL : "<<static_cast<int>(dec1.r1_sel);
-    std::cout<<"\n R1_RE : "<<static_cast<int>(dec1.r1_re);
-    std::cout<<"\n R2_SEL : "<<static_cast<int>(dec1.r2_sel);
-    std::cout<<"\n R2_RE : "<<static_cast<int>(dec1.r2_re);
-    std::cout<<"\n WSEL : "<<static_cast<int>(dec1.wsel);
-    std::cout<<"\n REGFILE_ENBLE : "<<static_cast<int>(dec1.regfile_we);
-    std::cout<<"\n IS_LOAD : "<<static_cast<int>(dec1.is_load);
-    std::cout<<"\n IS_STORE : "<<static_cast<int>(dec1.is_store);
-    std::cout<<"\n IS_BRANCH : "<<static_cast<int>(dec1.is_branch);
-    std::cout<<"\n IS_CONTROL : "<<static_cast<int>(dec1.is_branch);
-    std::cout<<"\n IS_SYSTEM : "<<static_cast<int>(dec1.is_system);
 }
 

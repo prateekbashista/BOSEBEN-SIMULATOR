@@ -73,6 +73,7 @@ int stall_rob;
 
 struct rob_entry{
     uint64_t id;
+    int complete;
     REG PC;
     BYTE opcode;
     REG logical_reg;
