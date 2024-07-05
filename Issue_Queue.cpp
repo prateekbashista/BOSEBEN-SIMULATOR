@@ -60,6 +60,8 @@ class ISSUE_QUEUE
             new_iq->op2_TAG = -1;
             new_iq->op_value1 = -1;
             new_iq->op_value2 = -1;
+            new_iq->src1 = (r1_re)? r1_sel : -1;
+            new_iq->src2 = (r2_re)? r2_sel : -1;
             
             if(r1_re || r2_re)
             {
@@ -70,23 +72,48 @@ class ISSUE_QUEUE
         }
 
     }
-    void wakeup_operand(uint64_t id, int reg_num)
+    void wakeup_operand(REG PC, REG RD, BYTE r1_re, BYTE r2_re)
     {
         struct iq_entry *iter  = head;
 
         while(iter)
         {   
-            if(iter->dest_rob_TAG == id)
+            if(iter->PC == PC)
             {
-                if(reg_num == 1) 
+                if(RD == iter->src1 && r1_re) 
                     iter->wakeup1 = 1;
-                if(reg_num == 2)
+                if(RD == iter->src2 && r2_re)
                     iter->wakeup2 = 1;
             }
             iter = iter->next;
         }
 
         delete iter;
+    }
+    struct iq_entry* select_issue()
+    {
+        struct iq_entry *iter = head;
+        struct iq_entry *select = nullptr;
+
+        if(iter->wakeup1 && iter->wakeup2)
+        {
+            select = head;
+            head = head->next;
+            return select;
+        }
+
+        while(iter->next)
+        {
+            if(iter->next->wakeup1 && iter->next->wakeup2)
+            {
+                select = iter->next;
+                iter->next  = iter->next->next;
+                return select;
+            }
+            iter = iter->next;
+        }
+
+        return nullptr;
     }
     
     

@@ -90,6 +90,8 @@ struct iq_entry
 {
     // BYTE busy : 1; Redundant with software implementation
     REG dest_reg;
+    REG src1;
+    REG src2;
     REG PC;
     BYTE opcode;
     uint64_t dest_rob_TAG;

@@ -2,6 +2,7 @@
 #include "decode_riscv32im.h"
 #include "ROB.cpp"
 #include "Issue_Queue.cpp"
+#include "INT_FU.cpp"
 #include "LSQ.cpp"
 #include "RMT.cpp"
 #include <cstdint>
@@ -46,7 +47,7 @@ struct CPU
 
 
     // Stages of the CPU
-    struct CPU_STAGE *fetch_op, *decode_op, *dispatch_op, *issue_op, *integer_op, *memory_op, *commit_op; 
+    struct CPU_STAGE *fetch_op, *decode_op, *dispatch_op, *issue_op, *integer_op, *memory_op, *commit_op_mem, *commit_op_int; 
 
     // REG X0 - X31
     REG X[32]; // Architectural Register File
@@ -68,7 +69,7 @@ struct CPU
             X[i] = 0;
         } //Reg Reset
 
-        fetch_op = decode_op = dispatch_op = issue_op = integer_op = memory_op = commit_op = nullptr;
+        fetch_op = decode_op = dispatch_op = issue_op = integer_op = memory_op = commit_op_mem = commit_op_int = nullptr;
     }
 };
 
@@ -76,8 +77,7 @@ struct CPU
 struct CPU cpu;
 struct MEMORY mem;
 ROB rob(32);
-ISSUE_QUEUE iq_int(8);
-ISSUE_QUEUE iq_mem(4);
+ISSUE_QUEUE iq(16);
 LOAD_QUEUE lq(4);
 STORE_QUEUE sq(4);
 RMT rmt;
@@ -110,25 +110,31 @@ void retire()
 
 void commit()
 {
-    CPU_STAGE *work_commit = cpu.commit_op;
+    CPU_STAGE *work_commit = cpu.commit_op_mem;
+    CPU_STAGE *work_int = cpu.commit_op_int;
 
     if(work_commit->opcode == LOAD)
     {
         lq.update_value(work_commit->PC, work_commit->output_alu); // LQ will write the value to the ROB, so kind of like retire
 
         // Search Store---------> if older store don't execute, if same address and value there , use the value
+        // If works, bypass to IQ as well ---------> iq.wakeup_operand
     }
     else if(work_commit->opcode == STORE)
     {
         sq.update_value(work_commit->PC, work_commit->output_alu); // Store will search regfile or ROB till it's instruction to ask for value.
+        // Writing value to ROB
+        
     }
-    else
-    {
-        rob.retire_value(work_commit->PC, work_commit->output_alu); // Normal write back to ROB instead now.
-    }
-
-    cpu.commit_op = nullptr;
     
+
+    if(cpu.commit_op_int != nullptr)
+        rob.retire_value(work_commit->PC, work_commit->output_alu); // Normal write back to ROB instead now.
+
+
+
+    cpu.commit_op_mem = nullptr;
+    cpu.commit_op_int = nullptr;
 }
 void memory()
 {
@@ -147,7 +153,26 @@ void memory()
             sq.add_to_sq(work_commit->PC,work_commit->r1_re,work_commit->r1_sel, work_commit->r2_re,work_commit->r2_sel);
     }
 
-    cpu.commit_op = cpu.memory_op;
+    cpu.commit_op_mem = cpu.memory_op;
+
+}
+
+void integer_execute()
+{
+    if(cpu.integer_op == nullptr)
+        return; 
+
+    CPU_STAGE *fu = cpu.integer_op;
+
+    int_fu(fu->insn,fu->PC, fu->r1_data, fu->r2_data, &(fu->output_alu));
+    iq.wakeup_operand(fu->PC, fu->wsel, fu->r1_re, fu->r2_re);
+    rob.retire_value(fu->PC, fu->output_alu);
+    cpu.commit_op_int = fu;
+}
+
+void issue()
+{
+
 
 }
 
