@@ -243,7 +243,17 @@ int main(int argc, char **argv)
 
     // Loading the hexdump in the instruction 
     int i = 0;
-    std::ifstream file("test_hexdump.txt"); 
+    std::ifstream file("test_hexdump.txt",std::fstream::in);
+
+    uint32_t a;
+    while(file.eof())
+    {
+        file>>std::hex >> a;
+        mem.insn_mem[i] = a;
+        i++;
+    }
+
+
 
 }
 
