@@ -4,10 +4,11 @@
 struct rmt_entry
 {
     uint64_t REG_MAP;
+    REG ARCH_REG;
     BYTE rmt_valid : 1;
     BYTE ready_in_rob : 1;
 
-    rmt_entry(REG REG_MAP, BYTE rmt_valid, BYTE ready_in_rob)
+    rmt_entry(uint64_t REG_MAP, BYTE rmt_valid, BYTE ready_in_rob)
     {
         this->REG_MAP = REG_MAP;
         this->rmt_valid = rmt_valid;
@@ -33,11 +34,11 @@ class RMT
     }
     void reset()
     {
-        delete RMT_mem;
         RMT();
     }
-    void rmt_update(REG logical_reg, uint64_t rob_tag)
+    void rmt_update(REG logical_reg, uint64_t rob_tag, BYTE )
     {
+        RMT_mem[logical_reg]->ARCH_REG = logical_reg;
         RMT_mem[logical_reg]->REG_MAP = rob_tag;
         RMT_mem[logical_reg]->rmt_valid = 1;
         RMT_mem[logical_reg]->ready_in_rob = 0;

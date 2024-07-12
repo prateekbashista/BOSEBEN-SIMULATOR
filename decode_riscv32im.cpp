@@ -2,7 +2,7 @@
 
 void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re, 
                 BYTE *wsel, BYTE *regfile_we, BYTE *is_load, BYTE *is_store, 
-                BYTE *is_branch, BYTE *is_control, BYTE *is_system)
+                BYTE *is_branch, BYTE *is_control, BYTE *is_system, BYTE *is_link)
 {   
     switch(opcode(insn))
     {

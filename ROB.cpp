@@ -1,4 +1,5 @@
 #include <includes.h>
+#include "ROB.h"
 
 
 // The rob will be implemented using a queue.
@@ -140,5 +141,6 @@ class ROB{
         }
         return true;
     }
-    
+
+    friend void issue();
 };

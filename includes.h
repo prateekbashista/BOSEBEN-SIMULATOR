@@ -93,6 +93,7 @@ struct iq_entry
     REG src1;
     REG src2;
     REG PC;
+    WORD insn;
     BYTE opcode;
     uint64_t dest_rob_TAG;
     uint64_t op1_TAG;

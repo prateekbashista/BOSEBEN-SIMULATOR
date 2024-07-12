@@ -116,6 +116,6 @@ class ISSUE_QUEUE
         return nullptr;
     }
     
-    
+    friend void scheduler();
 
 };
