@@ -1,12 +1,12 @@
-//#include "includes.h"
+#include "includes.h"
 #include "decode_riscv32im.h"
-#include "ROB.cpp"
-#include "Issue_Queue.cpp"
-#include "INT_FU.cpp"
-#include "LSQ.cpp"
-#include "RMT.cpp"
-#include <cstdint>
 #include "ROB.h"
+#include "Issue_Queue.h"
+#include "INT_FU.h"
+#include "LSQ.h"
+#include "RMT.h"
+#include "ROB.h"
+#include <cstdint>
 #include <fstream> 
 #include <iostream> 
 
@@ -34,6 +34,12 @@ struct CPU_STAGE
     BYTE is_control; // Is instruction a control instruction like jump
     BYTE is_system; // Is instruction from CSR, Priviledge mode support
     BYTE is_link; // Link address needed
+    
+
+    void PC_viewer()
+    {
+        std::cout<<"\t PC = "<<PC;
+    }
 };
 
 struct MEMORY
@@ -64,6 +70,7 @@ struct CPU
     void reset()
     {
         PC = 0;
+        NEXT_PC = 0;
         N = 0;
         P = 0;
         Z = 0;
@@ -73,7 +80,17 @@ struct CPU
             X[i] = 0;
         } //Reg Reset
 
-        fetch_op = decode_op = dispatch_op = issue_op = integer_op = memory_op = commit_op_mem = commit_op_int = nullptr;
+        fetch_op = new CPU_STAGE;
+        decode_op = new CPU_STAGE;
+        dispatch_op = new CPU_STAGE;
+        issue_op = new CPU_STAGE;
+        integer_op = new CPU_STAGE;
+        memory_op = new CPU_STAGE;
+        commit_op_mem = new CPU_STAGE;
+        commit_op_int = new CPU_STAGE;
+                
+        /*fetch_op =*/ decode_op = dispatch_op = issue_op = integer_op = memory_op = commit_op_mem = commit_op_int = nullptr;
+
     }
 };
 
@@ -94,7 +111,6 @@ void retire()
         return;
 
     struct rob_entry *temp = rob.peek_head();
-
     if(temp->complete == 1)
     {
         temp = rob.commit_from_rob();
@@ -117,23 +133,27 @@ void commit()
     CPU_STAGE *work_commit = cpu.commit_op_mem;
     CPU_STAGE *work_int = cpu.commit_op_int;
 
-    if(work_commit->opcode == LOAD)
+    if(cpu.commit_op_int != nullptr)
     {
-        lq.update_value(work_commit->PC, work_commit->output_alu); // LQ will write the value to the ROB, so kind of like retire
+        std::cout<<"PC (COMMIT) : "<<work_int->insn;
 
-        // Search Store---------> if older store don't execute, if same address and value there , use the value
-        // If works, bypass to IQ as well ---------> iq.wakeup_operand
-    }
-    else if(work_commit->opcode == STORE)
-    {
-        sq.update_value(work_commit->PC, work_commit->output_alu); // Store will search regfile or ROB till it's instruction to ask for value.
-        // Writing value to ROB
+        if(work_commit->opcode == LOAD)
+        {
+            lq.update_value(work_commit->PC, work_commit->output_alu); // LQ will write the value to the ROB, so kind of like retire
+
+            // Search Store---------> if older store don't execute, if same address and value there , use the value
+            // If works, bypass to IQ as well ---------> iq.wakeup_operand
+        }
+        else if(work_commit->opcode == STORE)
+        {
+            sq.update_value(work_commit->PC, work_commit->output_alu); // Store will search regfile or ROB till it's instruction to ask for value.
+            // Writing value to ROB
+            
+        }
         
     }
-    
-
-    if(cpu.commit_op_int != nullptr)
-        rob.retire_value(work_commit->PC, work_commit->output_alu); // Normal write back to ROB instead now.
+        if(cpu.commit_op_int != nullptr)
+            rob.retire_value(work_commit->PC, work_commit->output_alu); // Normal write back to ROB instead now.
 
 
 
@@ -179,6 +199,9 @@ void integer_execute()
 void issue()
 {
 
+    if(iq.select_issue() == nullptr)
+        return;
+
     iq_entry *issued_int = iq.select_issue();
     CPU_STAGE *issue_pckt;
 
@@ -200,7 +223,12 @@ void issue()
 
 void dispatch()
 {
+
     CPU_STAGE *dispatch_p = cpu.dispatch_op;
+
+    if(cpu.dispatch_op == nullptr)
+        return;
+
 
     rob.add_to_rob(dispatch_p->PC, 
                    dispatch_p->opcode, 
@@ -216,11 +244,16 @@ void dispatch()
                    dispatch_p->wsel, 
                    dispatch_p->regfile_we);
 
+    
+
 }
 
 void decode ()
 {
     CPU_STAGE *dec = cpu.decode_op;
+    
+    if(cpu.decode_op == nullptr)
+        return;
 
     decoder(dec->insn,&dec->r1_sel, &dec->r1_re, &dec->r2_sel, &dec->r2_re, 
             &dec->wsel, &dec->regfile_we, &dec->is_load, &dec->is_store, 
@@ -231,10 +264,14 @@ void decode ()
 
 void fetch()
 {
-    cpu.decode_op->PC = cpu.PC;
-    cpu.decode_op->insn = mem.insn_mem[cpu.PC]; // Fetch fresh insn fro I$ Cache
+    CPU_STAGE *dec_packet = new CPU_STAGE;
+    dec_packet->PC = 1;
+    dec_packet->insn = 0x00210293;
+    cpu.fetch_op->PC = dec_packet->PC;//cpu.PC;
+    cpu.fetch_op->insn = dec_packet->insn;//mem.insn_mem[cpu.PC]; // Fetch fresh insn fro I$ Cache
 
-    cpu.NEXT_PC = cpu.PC++; // This is where branch prediction will be added
+    //cpu.NEXT_PC = cpu.PC++; // This is where branch prediction will be added
+    cpu.decode_op = cpu.fetch_op;
 }
 
 int main(int argc, char **argv)
@@ -243,16 +280,21 @@ int main(int argc, char **argv)
 
     // Loading the hexdump in the instruction 
     int i = 0;
-    std::ifstream file("test_hexdump.txt",std::fstream::in);
 
-    uint32_t a;
-    while(file.eof())
+    while(i<20)
     {
-        file>>std::hex >> a;
-        mem.insn_mem[i] = a;
+        retire();
+        commit();
+        memory();
+        integer_execute();
+        issue();
+        dispatch();
+        decode();
+        fetch();
+        if(i == 19)
+            std::cout<<"PC = "<<cpu.commit_op_int->insn;
         i++;
     }
-
 
 
 }

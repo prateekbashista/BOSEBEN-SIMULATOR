@@ -1,3 +1,7 @@
+#ifndef _BRANCHFU_
+#define _BRANCHFU_
+
+
 #include "includes.h"
 
 uint32_t imm12(REG insn)
@@ -67,3 +71,5 @@ void int_fu(WORD insn, REG PC, WORD r1_data, WORD r2_data, WORD *result)
         
     }
 }
+
+#endif

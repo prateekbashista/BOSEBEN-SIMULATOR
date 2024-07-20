@@ -1,3 +1,7 @@
+#ifndef _LSQ_
+#define _LSQ_
+
+
 #include "includes.h"
 
 
@@ -159,4 +163,6 @@ class STORE_QUEUE
 
 
 };
+
+#endif
 

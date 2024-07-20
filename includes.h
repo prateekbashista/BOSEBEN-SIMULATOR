@@ -3,6 +3,10 @@
 
 #include "datatypes.h"
 
+// void decoder(WORD ,BYTE *, BYTE *, BYTE *, BYTE *, 
+//                 BYTE *, BYTE *, BYTE *, BYTE *, 
+//                 BYTE *, BYTE *, BYTE *, BYTE *);
+
 /*************INSTRUCTION DECLARATION***********/
 #define LUI (BYTE)(0x37)
 #define AUIPC (BYTE)(0x17)
@@ -105,7 +109,7 @@ struct iq_entry
     struct iq_entry *next;
 };
 
-struct iq_entry *select;
+struct iq_entry *selec;
 int stall_lq; 
 int stall_sq;
 

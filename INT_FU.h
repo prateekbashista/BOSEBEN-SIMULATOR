@@ -1,3 +1,6 @@
+#ifndef _INTFU_
+#define _INTFU_
+
 #include "includes.h"
 
 uint32_t sext(REG insn,uint32_t amt)
@@ -145,3 +148,5 @@ void int_fu(WORD insn, REG PC, WORD r1_data, WORD r2_data, WORD *result)
         }
     }
 }
+
+#endif
