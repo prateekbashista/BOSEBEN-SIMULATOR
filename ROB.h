@@ -8,142 +8,78 @@
 
 class ROB{
 
-    rob_entry *head, *tail;
+    struct rob_entry *ROB_QUEUE;
+    int head, tail;
+    int head_wrap,tail_wrap;
     int capacity;
     int current;
-    uint64_t new_id;
 
     public:
 
+    ROB(int size)
+    {
+        ROB_QUEUE = new struct rob_entry[size];
 
-    ROB() : head(nullptr), tail(nullptr)
-    {
-        capacity = 1;
-        current = 0;
-        new_id = 0;
+        for(int i = 0; i<size;i++)
+        {
+            // Initiliasing the entry to be invalid
+            ROB_QUEUE[i].valid = 0;
+        }
+
+        head = tail = 0;
+        head_wrap = tail_wrap = 0;
         stall_rob = 0;
-    }
-    ROB(int capacity) : head(nullptr), tail(nullptr)
-    {
-        this->capacity = capacity;
+        capacity = size;
         current = 0;
-        new_id = 0;
-        stall_rob = 0;
     }
 
     struct rob_entry* peek_head()
     {
-        return head;
+        if(ROB_QUEUE[head].valid)
+            return &(ROB_QUEUE[head]);
+        
+        return nullptr;
     }
-    void add_to_rob(REG PC, BYTE opcode, REG logical_reg, REG previous_reg, REG VALUE)
+    int push_to_rob(REG PC, BYTE opcode, REG Dest)
     {
-        struct rob_entry *new_entry = new struct rob_entry;
-        new_id++;
-        new_entry->id = new_id;
-        new_entry->complete = 0;
-        new_entry->PC = PC;
-        new_entry->opcode = opcode;
-        new_entry->logical_reg = logical_reg;
-        new_entry->previous_reg = previous_reg;
-        new_entry->VALUE = VALUE;
-
-        if(current == 0)
-        {
-            head = tail = new_entry;
-            stall_rob = 0;
-            current++;
-        }  
-        else if(current == capacity)
-        {
-            stall_rob = 1;
-            delete new_entry;
-            new_id --;
-        }
-        else
+        if(head == tail && head_wrap != tail_wrap)
         {   
+            // Full Condition of the queue
+            stall_rob  = 1;
+            return -1;
+        }
+        else 
+        {
+            // Adding the entry to ROB
             stall_rob = 0;
-            tail->next  = new_entry;
-            tail = new_entry;
-            issued_id = new_id;
-            capacity++;
-        }
-    }
-    void reset_rob()
-    {
-        ROB(capacity);
-    }
-    void exception_set(REG PC)
-    {
-        struct rob_entry* iter = head;
+            ROB_QUEUE[tail].valid = 1;
+            ROB_QUEUE[tail].PC = PC;
+            ROB_QUEUE[tail].opcode = opcode;
+            ROB_QUEUE[tail].logical_reg = Dest;
+            int rob_pointer = tail;
+            tail++;
 
-        while(iter!=nullptr)
-        {
-            if(iter->PC == PC)
+            if(tail == capacity)
             {
-                iter->exception = 1;
-                break;
-            }
-            iter = iter->next;
-        }    
-
-    }
-    void retire_value(REG PC, WORD VALUE)
-    {
-        struct rob_entry *iter = head;
-
-        while(iter!=nullptr)
-        {
-            if(iter->PC == PC)
-            {
-                iter->VALUE = VALUE;
-                iter->complete = 1;
-                break;
-            }
-            iter = iter->next;
-        }
-    }
-    struct rob_entry* commit_from_rob()
-    {
-        if(exception_handle() == true)
-        {
-                
-            struct rob_entry *del = nullptr;
-            if(current == 0)
-            {
-                std::cout<<"\n C++ Error: Trying to decrement an empty ROB";
-            }
-            else if(head->next == nullptr)
-            {
-                del  = head;
-                delete head;
-                head = tail = nullptr;
-                current--;
-            }
-            else
-            {
-                struct rob_entry *freer = head;
-                head = head->next;
-                delete freer;
-                current--;
+                tail = 0;
+                tail_wrap = !tail_wrap;
             }
 
-            return del;
-        }
-        else
-        {
-            return nullptr; 
+            return rob_pointer;
         }
     }
-    bool exception_handle()
+    WORD read_val(WORD rob_tag)
     {
-        if(head->exception == 1)
-        {
-            head = tail;
-        }
-        return true;
+        return ROB_QUEUE[rob_tag].VALUE;
+    }
+    REG deposit_value(WORD rob_addr, WORD value)
+    {
+        ROB_QUEUE[rob_addr].VALUE = value;
+        ROB_QUEUE[rob_addr].complete = 1;
+        return ROB_QUEUE[rob_addr].logical_reg;
     }
 
-    friend void issue();
+
 };
 
 

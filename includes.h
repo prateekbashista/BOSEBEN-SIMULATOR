@@ -76,15 +76,16 @@
 int stall_rob;
 
 struct rob_entry{
-    uint64_t id;
+    //uint64_t id;
     int complete;
+    int valid;
     REG PC;
     BYTE opcode;
     REG logical_reg;
-    REG previous_reg;
+    //REG previous_reg;
     WORD VALUE;
     BYTE exception : 1;
-    struct rob_entry *next;
+    //struct rob_entry *next;
 };
 
 int stall_iq;
@@ -92,10 +93,6 @@ uint64_t issued_id; // New Id issued to a rob entry for dependency tracking
 
 struct iq_entry
 {
-    // BYTE busy : 1; Redundant with software implementation
-    REG dest_reg;
-    REG src1;
-    REG src2;
     REG PC;
     WORD insn;
     BYTE opcode;
@@ -104,9 +101,11 @@ struct iq_entry
     uint64_t op2_TAG;
     WORD op_value1;
     WORD op_value2;
+    BYTE r1_re;
+    BYTE r2_re;
+    BYTE regfile_we;
     BYTE wakeup1 : 1;
     BYTE wakeup2 : 1;
-    struct iq_entry *next;
 };
 
 struct iq_entry *selec;

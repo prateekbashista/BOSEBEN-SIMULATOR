@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <fstream> 
 #include <iostream> 
+#include <stdlib.h>
 
 
 struct CPU_STAGE
@@ -110,22 +111,22 @@ void retire()
     if(rob.peek_head() == nullptr)
         return;
 
-    struct rob_entry *temp = rob.peek_head();
-    if(temp->complete == 1)
-    {
-        temp = rob.commit_from_rob();
+    // struct rob_entry *temp = rob.peek_head();
+    // if(temp->complete == 1)
+    // {
+    //     temp = rob.commit_from_rob();
 
-        if(temp->opcode == STORE)
-        {
-            mem.data_mem[cpu.X[temp->logical_reg]] = temp->VALUE; // Wrong right now
-        }
-        else
-        {
-            cpu.X[temp->logical_reg] = temp->VALUE;    
-        }
+    //     if(temp->opcode == STORE)
+    //     {
+    //         mem.data_mem[cpu.X[temp->logical_reg]] = temp->VALUE; // Wrong right now
+    //     }
+    //     else
+    //     {
+    //         cpu.X[temp->logical_reg] = temp->VALUE;    
+    //     }
     
-        delete temp;
-    }
+    //     delete temp;
+    // }
 }
 
 void commit()
@@ -133,28 +134,33 @@ void commit()
     CPU_STAGE *work_commit = cpu.commit_op_mem;
     CPU_STAGE *work_int = cpu.commit_op_int;
 
-    if(cpu.commit_op_int != nullptr)
-    {
-        std::cout<<"PC (COMMIT) : "<<work_int->insn;
+    // if(cpu.commit_op_int != nullptr)
+    // {
+    //     std::cout<<"PC (COMMIT) : "<<work_int->insn;
 
-        if(work_commit->opcode == LOAD)
-        {
-            lq.update_value(work_commit->PC, work_commit->output_alu); // LQ will write the value to the ROB, so kind of like retire
+    //     if(work_commit->opcode == LOAD)
+    //     {
+    //         lq.update_value(work_commit->PC, work_commit->output_alu); // LQ will write the value to the ROB, so kind of like retire
 
-            // Search Store---------> if older store don't execute, if same address and value there , use the value
-            // If works, bypass to IQ as well ---------> iq.wakeup_operand
-        }
-        else if(work_commit->opcode == STORE)
-        {
-            sq.update_value(work_commit->PC, work_commit->output_alu); // Store will search regfile or ROB till it's instruction to ask for value.
-            // Writing value to ROB
+    //         // Search Store---------> if older store don't execute, if same address and value there , use the value
+    //         // If works, bypass to IQ as well ---------> iq.wakeup_operand
+    //     }
+    //     else if(work_commit->opcode == STORE)
+    //     {
+    //         sq.update_value(work_commit->PC, work_commit->output_alu); // Store will search regfile or ROB till it's instruction to ask for value.
+    //         // Writing value to ROB
             
-        }
+    //     }
         
-    }
-        if(cpu.commit_op_int != nullptr)
-            rob.retire_value(work_commit->PC, work_commit->output_alu); // Normal write back to ROB instead now.
+    // }
+    //     if(cpu.commit_op_int != nullptr)
+    //         rob.retire_value(work_commit->PC, work_commit->output_alu); // Normal write back to ROB instead now.
 
+    if(work_int == nullptr)
+        return;
+    
+    WORD dest = rob.deposit_value(work_int->wsel, work_int->output_alu);
+    rmt.ready_rob_bit(dest);
 
 
     cpu.commit_op_mem = nullptr;
@@ -189,36 +195,34 @@ void integer_execute()
 
     CPU_STAGE *fu = cpu.integer_op;
 
+    // The value broadcasted on the common data bus (CDB)
     int_fu(fu->insn,fu->PC, fu->r1_data, fu->r2_data, &(fu->output_alu));
-    iq.wakeup_operand(fu->PC, fu->wsel, fu->r1_re, fu->r2_re);
-    rob.retire_value(fu->PC, fu->output_alu);
-    rmt.ready_rob_bit(fu->wsel);
+    iq.wakeup_operand(fu->wsel,fu->regfile_we, fu->output_alu); // wakeup the operands and bypass the value
     cpu.commit_op_int = fu;
 }
 
 void issue()
 {
+    iq_entry *issued_int = iq.select_issue();
 
-    if(iq.select_issue() == nullptr)
+    if(issued_int == nullptr)
         return;
 
-    iq_entry *issued_int = iq.select_issue();
-    CPU_STAGE *issue_pckt;
+    CPU_STAGE *issue_pckt = new CPU_STAGE;
 
-    issue_pckt->funct3op = funct3(issued_int->PC);
-    issue_pckt->funct7op = funct7(issued_int->PC);
+    issue_pckt->funct3op = funct3(issued_int->insn);
+    issue_pckt->funct7op = funct7(issued_int->insn);
     issue_pckt->r1_data = issued_int->op_value1;
-    issue_pckt->r1_re = 1;
+    issue_pckt->r1_re = issued_int->r1_re;
     issue_pckt->r2_data = issued_int->op_value2;
-    issue_pckt->r2_re = 1;
+    issue_pckt->r2_re = issued_int->r2_re;
     issue_pckt->opcode = issued_int->opcode;
     issue_pckt->PC = issued_int->PC;
     issue_pckt->insn = issued_int->insn;
-    issue_pckt->regfile_we = 1;
-    issue_pckt->wsel = issued_int->dest_reg;
+    issue_pckt->regfile_we = issued_int->regfile_we;
+    issue_pckt->wsel = issued_int->dest_rob_TAG;
 
     cpu.integer_op = issue_pckt;
-
 }
 
 void dispatch()
@@ -229,23 +233,49 @@ void dispatch()
     if(cpu.dispatch_op == nullptr)
         return;
 
+    // Add the entry to rob and get the Rob tag
+    int rob_tag = rob.push_to_rob(dispatch_p->PC, 
+                                  dispatch_p->opcode, 
+                                  dispatch_p->wsel);
 
-    rob.add_to_rob(dispatch_p->PC, 
-                   dispatch_p->opcode, 
-                   dispatch_p->wsel, 
-                   (-1), 
-                   (-1));
-    iq.push_to_iq( dispatch_p->PC, 
-                   dispatch_p->insn, 
-                   dispatch_p->r1_sel,
-                   dispatch_p->r1_re, 
-                   dispatch_p->r2_sel, 
-                   dispatch_p->r2_re, 
-                   dispatch_p->wsel, 
-                   dispatch_p->regfile_we);
-
+    // Read SRC Values
+    BYTE rd_rob1, rd_rob2;
+    WORD src_t1,src_t2;
+    rmt.return_operands(dispatch_p->r1_sel,dispatch_p->r2_sel,
+                        rd_rob1,rd_rob2,src_t1,src_t2);
     
+    // Push new mapping to RMT with ROB Tag
+    rmt.rmt_update(dispatch_p->wsel, rob_tag);
+    
+    WORD val1 = NULL,val2 = NULL;
+    if(rd_rob1 == 0)
+    {
+        val1 = cpu.X[dispatch_p->r1_sel];
+    }
+    else if(rd_rob1 == 1)
+    {
+        val1 = rob.read_val(src_t1);
+    }
+    
+    if(rd_rob2 == 0)
+    {
+        val2 = cpu.X[dispatch_p->r2_sel];
+    }
+    else if(rd_rob2 == 1)
+    {
+        val2 = rob.read_val(src_t2);
+    }
+    
+    BYTE wk1 = (val1 == NULL) ? 1 : 0;
+    BYTE wk2 = (val2 == NULL) ? 1 : 0;
 
+
+    // Push the renamed instruction to IQ
+    iq.push_to_iq(dispatch_p->PC,dispatch_p->insn,
+                  dispatch_p->opcode,rob_tag,
+                  src_t1,src_t2,val1,val2,wk1,wk2,
+                  dispatch_p->r1_re,dispatch_p->r2_re,
+                   dispatch_p->regfile_we);
 }
 
 void decode ()
