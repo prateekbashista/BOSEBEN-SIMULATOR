@@ -57,7 +57,7 @@ class RMT
         }
         else
         {
-            tag1 = RMT_mem[op_reg1]->REG_MAP;
+            tag1 = (RMT_mem[op_reg1]->REG_MAP);
             rd_rob1 = 2;            
         }
         if(RMT_mem[op_reg2]->REG_MAP == -1)

@@ -155,6 +155,23 @@ class ISSUE_QUEUE
         }
     }
 
+    void print_iq()
+    {
+        int i = head;
+
+
+        while(i!=tail)
+        {
+            std::cout<<"PC: "<<IQ[i].PC<<"\nINSN: "<<IQ[i].insn<<"\nOPCODE: "<<(int)IQ[i].opcode<<"\nDEST: "<<IQ[i].dest_rob_TAG
+                    <<"\nOP1 TAG: "<<IQ[i].op1_TAG<<"\nOP2 TAG: "<<IQ[i].op2_TAG<<"\nOP VAL1: "<<IQ[i].op_value1
+                    <<"\nOP VAL2: "<<IQ[i].op_value2<<"\nR1_RE: "<<(int)IQ[i].r1_re<<"\nR2_RE: "<<(int)IQ[i].r2_re
+                    <<"\nREGF_WE: "<<(int)IQ[i].regfile_we<<"\nWK1: "<<(int)IQ[i].wakeup1<<"\nWK2: "<<(int)IQ[i].wakeup2<<"\t"<<std::endl<<std::endl;
+            i++;
+            if(i == capacity)
+                i = 0;
+
+        }
+    }
 
 };
 

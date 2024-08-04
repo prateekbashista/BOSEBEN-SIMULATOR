@@ -197,6 +197,8 @@ void integer_execute()
 
     // The value broadcasted on the common data bus (CDB)
     int_fu(fu->insn,fu->PC, fu->r1_data, fu->r2_data, &(fu->output_alu));
+    //std::cout<<"Ans : "<<fu->output_alu<<std::endl;
+    std::cout<<"ROB_TAG INTEGER EXECUTE: "<<fu->wsel;
     iq.wakeup_operand(fu->wsel,fu->regfile_we, fu->output_alu); // wakeup the operands and bypass the value
     cpu.commit_op_int = fu;
 }
@@ -204,7 +206,7 @@ void integer_execute()
 void issue()
 {
     iq_entry *issued_int = iq.select_issue();
-
+    
     if(issued_int == nullptr)
         return;
 
@@ -221,7 +223,8 @@ void issue()
     issue_pckt->insn = issued_int->insn;
     issue_pckt->regfile_we = issued_int->regfile_we;
     issue_pckt->wsel = issued_int->dest_rob_TAG;
-
+    
+    std::cout<<"ROB_TAG INTEGER ISSUE: "<<issue_pckt->wsel;
     cpu.integer_op = issue_pckt;
 }
 
@@ -237,17 +240,21 @@ void dispatch()
     int rob_tag = rob.push_to_rob(dispatch_p->PC, 
                                   dispatch_p->opcode, 
                                   dispatch_p->wsel);
-
+    std::cout<<"********************\n";
+    std::cout<<"ROB TAG :"<<rob_tag<<std::endl;
     // Read SRC Values
     BYTE rd_rob1, rd_rob2;
     WORD src_t1,src_t2;
     rmt.return_operands(dispatch_p->r1_sel,dispatch_p->r2_sel,
                         rd_rob1,rd_rob2,src_t1,src_t2);
-    
+    std::cout<<"SRC_T1: "<<src_t1<<std::endl;
+    std::cout<<"SRC_T2: "<<src_t2<<std::endl;
+    std::cout<<"********************\n";
     // Push new mapping to RMT with ROB Tag
     rmt.rmt_update(dispatch_p->wsel, rob_tag);
     
     WORD val1 = NULL,val2 = NULL;
+
     if(rd_rob1 == 0)
     {
         val1 = cpu.X[dispatch_p->r1_sel];
@@ -266,8 +273,8 @@ void dispatch()
         val2 = rob.read_val(src_t2);
     }
     
-    BYTE wk1 = (val1 == NULL) ? 1 : 0;
-    BYTE wk2 = (val2 == NULL) ? 1 : 0;
+    BYTE wk1 = (val1 == NULL) ? 0 : 1;
+    BYTE wk2 = (val2 == NULL) ? 0 : 1;
 
 
     // Push the renamed instruction to IQ
@@ -276,6 +283,9 @@ void dispatch()
                   src_t1,src_t2,val1,val2,wk1,wk2,
                   dispatch_p->r1_re,dispatch_p->r2_re,
                    dispatch_p->regfile_we);
+    
+    iq.print_iq();
+
 }
 
 void decode ()
@@ -295,12 +305,12 @@ void decode ()
 void fetch()
 {
     CPU_STAGE *dec_packet = new CPU_STAGE;
-    dec_packet->PC = 1;
-    dec_packet->insn = 0x00210293;
+    dec_packet->PC = cpu.NEXT_PC;
+    dec_packet->insn = 0x00210113;
     cpu.fetch_op->PC = dec_packet->PC;//cpu.PC;
     cpu.fetch_op->insn = dec_packet->insn;//mem.insn_mem[cpu.PC]; // Fetch fresh insn fro I$ Cache
 
-    //cpu.NEXT_PC = cpu.PC++; // This is where branch prediction will be added
+    cpu.NEXT_PC = ++cpu.PC; // This is where branch prediction will be added
     cpu.decode_op = cpu.fetch_op;
 }
 
@@ -310,8 +320,9 @@ int main(int argc, char **argv)
 
     // Loading the hexdump in the instruction 
     int i = 0;
-
-    while(i<20)
+    cpu.PC = 0;
+    cpu.NEXT_PC = 0;
+    while(i<10)
     {
         retire();
         commit();
@@ -321,10 +332,11 @@ int main(int argc, char **argv)
         dispatch();
         decode();
         fetch();
-        if(i == 19)
-            std::cout<<"PC = "<<cpu.commit_op_int->insn;
+        // if(i == 19)
+        //     std::cout<<"PC = "<<cpu.commit_op_int->insn;
         i++;
     }
+    rob.print_ROB();
 
 
 }

@@ -78,6 +78,26 @@ class ROB{
         ROB_QUEUE[rob_addr].complete = 1;
         return ROB_QUEUE[rob_addr].logical_reg;
     }
+    void print_ROB()
+    {
+        int i = head;
+        while(i!=tail)
+        {
+            std::cout<<"ROB#"<<i<<std::endl;
+            std::cout<<"Complete : "<<ROB_QUEUE[i].complete<<std::endl;
+            std::cout<<"Valid : "<<ROB_QUEUE[i].valid<<std::endl;
+            std::cout<<"PC : "<<ROB_QUEUE[i].PC<<std::endl;
+            std::cout<<"OPCODE : "<<ROB_QUEUE[i].opcode<<std::endl;
+            std::cout<<"LOGICAL REG : "<<ROB_QUEUE[i].logical_reg<<std::endl;
+            std::cout<<"VALUE : "<<ROB_QUEUE[i].VALUE<<std::endl;
+            std::cout<<std::endl;
+            i++;
+            if(i == capacity)
+            {
+                i = 0;
+            }
+        }
+    }
 
 
 };
