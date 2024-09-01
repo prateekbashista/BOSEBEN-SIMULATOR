@@ -3,6 +3,22 @@
 
 #include "includes.h"
 
+/*========================================================================
+Architecture of Rename Map Table (RMT)
+- The struct for rmt entry contains the mapping, valid, ready-in-rob
+- This class models an RMT for a scalar out of order processor
+- Thus, it contains the 2 read ports and 1 write port
+- Class Functions : 
+    - RMT constructor : intialise the default values to 32 entries of ROB
+    - Reset : Calls the constructor
+    - RMT_update : when a new entry is addedin ROB, 
+                   a new mapping pushed to RMT.
+    - return_operands : 
+                following values of rd_rob : 1 -> ready in rob
+                                             0 -> not in rmt
+                                             2 -> not ready in rob
+    - ready in rob bit : fucntion to set the bit after result available
+=========================================================================*/
 
 struct rmt_entry
 {

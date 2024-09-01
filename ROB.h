@@ -87,7 +87,7 @@ class ROB{
             std::cout<<"Complete : "<<ROB_QUEUE[i].complete<<std::endl;
             std::cout<<"Valid : "<<ROB_QUEUE[i].valid<<std::endl;
             std::cout<<"PC : "<<ROB_QUEUE[i].PC<<std::endl;
-            std::cout<<"OPCODE : "<<ROB_QUEUE[i].opcode<<std::endl;
+            std::cout<<"OPCODE : "<<(int)ROB_QUEUE[i].opcode<<std::endl;
             std::cout<<"LOGICAL REG : "<<ROB_QUEUE[i].logical_reg<<std::endl;
             std::cout<<"VALUE : "<<ROB_QUEUE[i].VALUE<<std::endl;
             std::cout<<std::endl;

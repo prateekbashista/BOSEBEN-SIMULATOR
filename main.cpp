@@ -223,7 +223,7 @@ void issue()
     issue_pckt->insn = issued_int->insn;
     issue_pckt->regfile_we = issued_int->regfile_we;
     issue_pckt->wsel = issued_int->dest_rob_TAG;
-    
+
     std::cout<<"ROB_TAG INTEGER ISSUE: "<<issue_pckt->wsel;
     cpu.integer_op = issue_pckt;
 }
@@ -322,7 +322,7 @@ int main(int argc, char **argv)
     int i = 0;
     cpu.PC = 0;
     cpu.NEXT_PC = 0;
-    while(i<10)
+    while(i<5)
     {
         retire();
         commit();
@@ -338,6 +338,6 @@ int main(int argc, char **argv)
     }
     rob.print_ROB();
 
-
+    return 0;
 }
 
