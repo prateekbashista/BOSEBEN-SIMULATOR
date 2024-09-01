@@ -20,6 +20,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 0;
             *is_control = 0;
             *is_system = 0;
+
+            std::cout<< "\n LUI \n";
             break;
         } 
         case AUIPC:
@@ -33,6 +35,7 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 0;
             *is_control = 0;
             *is_system = 0;
+            std::cout<< "\n AUIPC \n";
             break;
         } 
         case JAL:
@@ -46,6 +49,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 0;
             *is_control = 1;
             *is_system = 0;
+
+            std::cout<< "\n JAL \n";
             break;
         }
         case JALR:
@@ -60,6 +65,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 0;
             *is_control = 1;
             *is_system = 0;
+
+            std::cout<< "\n JALR\n";
             break;
         }  
         case BRANCH :
@@ -74,6 +81,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 1;
             *is_control = 0;
             *is_system = 0;
+
+            std::cout<< "\n BRANCH\n";
             break;
         }
         case LOAD :
@@ -88,6 +97,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 0;
             *is_control = 0;
             *is_system = 0;
+
+            std::cout<< "\n LOAD\n";
             break;
         }
         case STORE :
@@ -102,6 +113,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 0;
             *is_control = 0;
             *is_system = 0;
+
+            std::cout<< "\n STORE\n";
             break;
         }
         case IMM_INSN :
@@ -116,6 +129,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 0;
             *is_control = 0;
             *is_system = 0;
+
+            std::cout<< "\n IMM_INSN\n";
             break;
         }
         case RTYPE_INSN : 
@@ -132,6 +147,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             *is_branch = 0;
             *is_control = 0;
             *is_system = 0;
+
+            std::cout<< "\n RTYPE\n";
             break;
         }
         case SYSTEM_INSN :
@@ -150,6 +167,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
                     *is_branch = 0;
                     *is_control = 0;
                     *is_system = 1;
+
+                    std::cout<< "\n CSRRW | CSRRS | CSRRC\n";
                     break;
                 }
                 case CSRRWI | CSRRSI | CSRRCI : 
@@ -163,6 +182,8 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
                     *is_branch = 0;
                     *is_control = 0;
                     *is_system = 1;
+
+                    std::cout<< "\n CSRRWI | CSRRSI | CSRRCI\n";
                     break;
                 }
                 default : 
@@ -182,7 +203,7 @@ void decoder(WORD insn,BYTE *r1_sel, BYTE *r1_re, BYTE *r2_sel, BYTE *r2_re,
             break;
         }
         default :
-            std::cout<<"\n INSTRUCTION NOT SUPPORTED IN CORE"; break;
+            std::cout<<"\n INSTRUCTION NOT SUPPORTED IN CORE\n"; break;
     }
 }
 

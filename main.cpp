@@ -190,26 +190,38 @@ void memory()
 
 void integer_execute()
 {
+    std::cout<<"\n========INT_FU==========\n";
     if(cpu.integer_op == nullptr)
+    {   std::cout<<"\n No INT Payload\n";
+         std::cout<<"\n===========================\n";
         return; 
+    }
 
+    
     CPU_STAGE *fu = cpu.integer_op;
 
     // The value broadcasted on the common data bus (CDB)
     int_fu(fu->insn,fu->PC, fu->r1_data, fu->r2_data, &(fu->output_alu));
-    //std::cout<<"Ans : "<<fu->output_alu<<std::endl;
-    std::cout<<"ROB_TAG INTEGER EXECUTE: "<<fu->wsel;
+    std::cout<<"\nAns : "<<fu->output_alu<<std::endl;
+    std::cout<<"\nROB_TAG INTEGER EXECUTE: "<<(int)fu->wsel<<std::endl;
     iq.wakeup_operand(fu->wsel,fu->regfile_we, fu->output_alu); // wakeup the operands and bypass the value
     cpu.commit_op_int = fu;
+    std::cout<<"\n===========================\n";
 }
 
 void issue()
 {
+    std::cout<<"\n========ISSUE==========\n";
     iq_entry *issued_int = iq.select_issue();
     
     if(issued_int == nullptr)
+    {
+        std::cout<<"\n No Issue Ready\n";
+         std::cout<<"\n===========================\n";
         return;
+    }    
 
+    //std::cout<<"\n Issue Ready\n";
     CPU_STAGE *issue_pckt = new CPU_STAGE;
 
     issue_pckt->funct3op = funct3(issued_int->insn);
@@ -224,23 +236,29 @@ void issue()
     issue_pckt->regfile_we = issued_int->regfile_we;
     issue_pckt->wsel = issued_int->dest_rob_TAG;
 
-    std::cout<<"ROB_TAG INTEGER ISSUE: "<<issue_pckt->wsel;
+    std::cout<<"\nROB_TAG INTEGER ISSUE: "<<(int)issue_pckt->wsel;
+
     cpu.integer_op = issue_pckt;
+    std::cout<<"\n===========================\n";
 }
 
 void dispatch()
 {
 
+    std::cout<<"\n========DISPATCH==========\n";
     CPU_STAGE *dispatch_p = cpu.dispatch_op;
 
     if(cpu.dispatch_op == nullptr)
+    {   std::cout<<"\n No Dispatch Payload\n"; 
+        std::cout<<"\n===========================\n";
         return;
+    }
 
     // Add the entry to rob and get the Rob tag
     int rob_tag = rob.push_to_rob(dispatch_p->PC, 
                                   dispatch_p->opcode, 
                                   dispatch_p->wsel);
-    std::cout<<"********************\n";
+    
     std::cout<<"ROB TAG :"<<rob_tag<<std::endl;
     // Read SRC Values
     BYTE rd_rob1, rd_rob2;
@@ -249,32 +267,44 @@ void dispatch()
                         rd_rob1,rd_rob2,src_t1,src_t2);
     std::cout<<"SRC_T1: "<<src_t1<<std::endl;
     std::cout<<"SRC_T2: "<<src_t2<<std::endl;
-    std::cout<<"********************\n";
+    
     // Push new mapping to RMT with ROB Tag
     rmt.rmt_update(dispatch_p->wsel, rob_tag);
     
     WORD val1 = NULL,val2 = NULL;
+    BYTE wk1 = 0, wk2 = 0;
 
     if(rd_rob1 == 0)
     {
         val1 = cpu.X[dispatch_p->r1_sel];
+        std::cout<<"\nVAL1 = "<<val1<<std::endl;
+        wk1 = 1;
     }
     else if(rd_rob1 == 1)
     {
         val1 = rob.read_val(src_t1);
+        std::cout<<"\nVAL1 = "<<val1<<std::endl;
+        wk1 = 1;
     }
     
     if(rd_rob2 == 0)
     {
         val2 = cpu.X[dispatch_p->r2_sel];
+        std::cout<<"\nVAL1 = "<<val2<<std::endl;
+        wk2 = 1;
     }
     else if(rd_rob2 == 1)
     {
         val2 = rob.read_val(src_t2);
+        std::cout<<"\nVAL1 = "<<val2<<std::endl;
+        wk2 = 1;
     }
     
-    BYTE wk1 = (val1 == NULL) ? 0 : 1;
-    BYTE wk2 = (val2 == NULL) ? 0 : 1;
+    // BYTE wk1 = (val1 == NULL) ? 0 : 1;
+    // BYTE wk2 = (val2 == NULL) ? 0 : 1;
+
+    std::cout<<"\nwakeup1 = "<<(int)wk1<<std::endl;
+    std::cout<<"\nwakeup2 = "<<(int)wk2<<std::endl;
 
 
     // Push the renamed instruction to IQ
@@ -286,20 +316,28 @@ void dispatch()
     
     iq.print_iq();
 
+    std::cout<<"\n===========================\n";
+
 }
 
 void decode ()
 {
+    std::cout<<"\n========DECODE==========\n";
     CPU_STAGE *dec = cpu.decode_op;
     
     if(cpu.decode_op == nullptr)
-        return;
+    {   
+        std::cout<<"\n No Decode Payload\n";
+        std::cout<<"\n===========================\n";
+         return;
+    }
 
     decoder(dec->insn,&dec->r1_sel, &dec->r1_re, &dec->r2_sel, &dec->r2_re, 
             &dec->wsel, &dec->regfile_we, &dec->is_load, &dec->is_store, 
             &dec->is_branch, &dec->is_control, &dec->is_system, &dec->is_link);
 
     cpu.dispatch_op = dec;
+    std::cout<<"\n===========================\n";
 }
 
 void fetch()
@@ -322,8 +360,11 @@ int main(int argc, char **argv)
     int i = 0;
     cpu.PC = 0;
     cpu.NEXT_PC = 0;
-    while(i<5)
-    {
+    while(i<10)
+    {   
+        std::cout<<"\n******************************************\n";
+        std::cout<<"\nCYCLE : "<<i<<std::endl;
+        
         retire();
         commit();
         memory();
@@ -335,6 +376,7 @@ int main(int argc, char **argv)
         // if(i == 19)
         //     std::cout<<"PC = "<<cpu.commit_op_int->insn;
         i++;
+        std::cout<<"\n******************************************\n";
     }
     rob.print_ROB();
 
