@@ -3,6 +3,18 @@
 
 CYCLE : 0
 
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+
+ No Payload to commit
+
+===========================
+
 ========INT_FU==========
 
  No INT Payload
@@ -32,6 +44,18 @@ CYCLE : 0
 ******************************************
 
 CYCLE : 1
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+
+ No Payload to commit
+
+===========================
 
 ========INT_FU==========
 
@@ -63,6 +87,18 @@ CYCLE : 1
 
 CYCLE : 2
 
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+
+ No Payload to commit
+
+===========================
+
 ========INT_FU==========
 
  No INT Payload
@@ -77,8 +113,8 @@ CYCLE : 2
 
 ========DISPATCH==========
 ROB TAG :0
-SRC_T1: 32609
-SRC_T2: 1944741024
+SRC_T1: 32722
+SRC_T2: 3299434912
 
 VAL1 = 0
 
@@ -116,6 +152,19 @@ WK2: 1
 
 CYCLE : 3
 
+========RETIRE==========
+
+ NOT COMPLETE TO RETIRE
+
+
+===========================
+
+========COMMIT==========
+
+ No Payload to commit
+
+===========================
+
 ========INT_FU==========
 
  No INT Payload
@@ -130,7 +179,7 @@ ROB_TAG INTEGER ISSUE: 0
 ========DISPATCH==========
 ROB TAG :1
 SRC_T1: 0
-SRC_T2: 2242443856
+SRC_T2: 2988403904
 
 VAL1 = 0
 
@@ -166,6 +215,19 @@ WK2: 1
 
 CYCLE : 4
 
+========RETIRE==========
+
+ NOT COMPLETE TO RETIRE
+
+
+===========================
+
+========COMMIT==========
+
+ No Payload to commit
+
+===========================
+
 ========INT_FU==========
 
 Ans : 2
@@ -182,7 +244,7 @@ ROB_TAG INTEGER ISSUE: 1
 ========DISPATCH==========
 ROB TAG :2
 SRC_T1: 1
-SRC_T2: 2242443856
+SRC_T2: 2988403904
 
 VAL1 = 0
 
@@ -218,6 +280,18 @@ WK2: 1
 
 CYCLE : 5
 
+========RETIRE==========
+
+ NOT COMPLETE TO RETIRE
+
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
 ========INT_FU==========
 
 Ans : 4
@@ -234,7 +308,7 @@ ROB_TAG INTEGER ISSUE: 2
 ========DISPATCH==========
 ROB TAG :3
 SRC_T1: 2
-SRC_T2: 2242443856
+SRC_T2: 2988403904
 
 VAL1 = 0
 
@@ -272,6 +346,19 @@ WK2: 1
 
 CYCLE : 6
 
+========RETIRE==========
+
+ REG : 2
+
+ VALUE : 2
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :4
+Destination Register (Commit) :2
+===========================
+
 ========INT_FU==========
 
 Ans : 6
@@ -288,7 +375,7 @@ ROB_TAG INTEGER ISSUE: 3
 ========DISPATCH==========
 ROB TAG :4
 SRC_T1: 3
-SRC_T2: 2242443856
+SRC_T2: 2988403904
 
 VAL1 = 0
 
@@ -326,6 +413,19 @@ WK2: 1
 
 CYCLE : 7
 
+========RETIRE==========
+
+ REG : 2
+
+ VALUE : 4
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :6
+Destination Register (Commit) :2
+===========================
+
 ========INT_FU==========
 
 Ans : 2
@@ -342,7 +442,7 @@ ROB_TAG INTEGER ISSUE: 4
 ========DISPATCH==========
 ROB TAG :5
 SRC_T1: 4
-SRC_T2: 2242443856
+SRC_T2: 2988403904
 
 VAL1 = 0
 
@@ -380,6 +480,19 @@ WK2: 1
 
 CYCLE : 8
 
+========RETIRE==========
+
+ REG : 2
+
+ VALUE : 6
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
 ========INT_FU==========
 
 Ans : 2
@@ -396,7 +509,7 @@ ROB_TAG INTEGER ISSUE: 5
 ========DISPATCH==========
 ROB TAG :6
 SRC_T1: 5
-SRC_T2: 2242443856
+SRC_T2: 2988403904
 
 VAL1 = 0
 
@@ -429,84 +542,6 @@ WK2: 1
 ===========================
 
 ******************************************
-
-******************************************
-
-CYCLE : 9
-
-========INT_FU==========
-
-Ans : 2
-
-ROB_TAG INTEGER EXECUTE: 5
-
-===========================
-
-========ISSUE==========
-
-ROB_TAG INTEGER ISSUE: 6
-===========================
-
-========DISPATCH==========
-ROB TAG :7
-SRC_T1: 6
-SRC_T2: 2242443856
-
-VAL1 = 0
-
-VAL1 = 0
-
-wakeup1 = 1
-
-wakeup2 = 1
-PC: 8
-INSN: 2162963
-OPCODE: 0
-DEST: 7
-OP1 TAG: 18446744073709551615
-OP2 TAG: 18446744073709551615
-OP VAL1: 0
-OP VAL2: 0
-R1_RE: 1
-R2_RE: 0
-REGF_WE: 1
-WK1: 1
-WK2: 1	
-
-
-===========================
-
-========DECODE==========
-
- IMM_INSN
-
-===========================
-
-******************************************
-ROB#0
-Complete : 1
-Valid : 1
-PC : 1
-OPCODE : 0
-LOGICAL REG : 2
-VALUE : 2
-
-ROB#1
-Complete : 1
-Valid : 1
-PC : 2
-OPCODE : 0
-LOGICAL REG : 2
-VALUE : 4
-
-ROB#2
-Complete : 1
-Valid : 1
-PC : 3
-OPCODE : 0
-LOGICAL REG : 2
-VALUE : 6
-
 ROB#3
 Complete : 1
 Valid : 1
@@ -516,12 +551,12 @@ LOGICAL REG : 2
 VALUE : 2
 
 ROB#4
-Complete : 1
+Complete : 0
 Valid : 1
 PC : 5
 OPCODE : 0
 LOGICAL REG : 2
-VALUE : 2
+VALUE : 0
 
 ROB#5
 Complete : 0
@@ -539,11 +574,197 @@ OPCODE : 0
 LOGICAL REG : 2
 VALUE : 0
 
-ROB#7
-Complete : 0
-Valid : 1
-PC : 8
-OPCODE : 0
-LOGICAL REG : 2
-VALUE : 0
+RMT#0
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
 
+RMT#1
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#2
+Register Binding : 6
+Valid : 1
+Ready in ROB : 1
+
+RMT#3
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#4
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#5
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#6
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#7
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#8
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#9
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#10
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#11
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#12
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#13
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#14
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#15
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#16
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#17
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#18
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#19
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#20
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#21
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#22
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#23
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#24
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#25
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#26
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#27
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#28
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#29
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#30
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+RMT#31
+Register Binding : -1
+Valid : 0
+Ready in ROB : 0
+
+
+REGFILE STATE
+X0=0
+X1=0
+X2=6
+X3=0
+X4=0
+X5=0
+X6=0
+X7=0
+X8=0
+X9=0
+X10=0
+X11=0
+X12=0
+X13=0
+X14=0
+X15=0
+X16=0
+X17=0
+X18=0
+X19=0
+X20=0
+X21=0
+X22=0
+X23=0
+X24=0
+X25=0
+X26=0
+X27=0
+X28=0
+X29=0
+X30=0
+X31=0

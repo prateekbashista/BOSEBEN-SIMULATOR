@@ -93,6 +93,15 @@ struct CPU
         /*fetch_op =*/ decode_op = dispatch_op = issue_op = integer_op = memory_op = commit_op_mem = commit_op_int = nullptr;
 
     }
+
+    void print_regfile()
+    {   
+        std::cout<<"\nREGFILE STATE\n";
+        for(int i = 0; i<32; i++)
+        {
+            std::cout<<"X"<<i<<"="<<X[i]<<std::endl;
+        } 
+    }
 };
 
 // Declaration of Datastructures of CPU
@@ -107,10 +116,14 @@ RMT rmt;
 
 void retire()
 {
+    std::cout<<"\n========RETIRE==========\n";
     // Nothing to commit
     if(rob.peek_head() == nullptr)
+    {
+        std::cout<<"\n No Payload to retire\n";
+        std::cout<<"\n===========================\n";
         return;
-
+    }
     // struct rob_entry *temp = rob.peek_head();
     // if(temp->complete == 1)
     // {
@@ -127,6 +140,23 @@ void retire()
     
     //     delete temp;
     // }
+
+    struct rob_entry *retire_payload = rob.commit_to_REG();
+
+    if(retire_payload != nullptr && retire_payload->valid)
+    {   
+        std::cout<<"\n REG : "<<retire_payload->logical_reg<<std::endl;
+        std::cout<<"\n VALUE : "<<retire_payload->VALUE<<std::endl;
+        cpu.X[retire_payload->logical_reg] = retire_payload->VALUE;
+        rmt.ready_rob_bit_0(retire_payload->logical_reg);
+    }
+    else 
+    {
+        std::cout<<"\n NOT COMPLETE TO RETIRE\n"<<std::endl;
+    }
+        
+    std::cout<<"\n===========================\n";
+
 }
 
 void commit()
@@ -156,15 +186,24 @@ void commit()
     //     if(cpu.commit_op_int != nullptr)
     //         rob.retire_value(work_commit->PC, work_commit->output_alu); // Normal write back to ROB instead now.
 
+    std::cout<<"\n========COMMIT==========\n";
     if(work_int == nullptr)
+    {
+        std::cout<<"\n No Payload to commit\n";
+        std::cout<<"\n===========================\n";
         return;
+    }
+        
     
     WORD dest = rob.deposit_value(work_int->wsel, work_int->output_alu);
+    std::cout<<"Register Value (Commit) :"<<(int)work_int->output_alu<<std::endl;
+    std::cout<<"Destination Register (Commit) :"<<(int)dest;
     rmt.ready_rob_bit(dest);
-
+    
 
     cpu.commit_op_mem = nullptr;
     cpu.commit_op_int = nullptr;
+    std::cout<<"\n===========================\n";
 }
 void memory()
 {
@@ -360,7 +399,7 @@ int main(int argc, char **argv)
     int i = 0;
     cpu.PC = 0;
     cpu.NEXT_PC = 0;
-    while(i<10)
+    while(i<9)
     {   
         std::cout<<"\n******************************************\n";
         std::cout<<"\nCYCLE : "<<i<<std::endl;
@@ -379,6 +418,8 @@ int main(int argc, char **argv)
         std::cout<<"\n******************************************\n";
     }
     rob.print_ROB();
+    rmt.print_RMT();
+    cpu.print_regfile();
 
     return 0;
 }

@@ -99,6 +99,21 @@ class ROB{
         ROB_QUEUE[rob_addr].complete = 1;
         return ROB_QUEUE[rob_addr].logical_reg;
     }
+    rob_entry* commit_to_REG()
+    {
+        if(ROB_QUEUE[head].complete == 1)
+        {
+            struct rob_entry *ret = &ROB_QUEUE[head];
+            head++;
+            if(head == capacity)
+            {
+                head = 0;
+            }
+
+            return ret;
+        }
+        return nullptr;
+    }
     void print_ROB()
     {
         int i = head;

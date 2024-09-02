@@ -58,7 +58,7 @@ class RMT
     {
         RMT_mem[logical_reg]->REG_MAP = rob_tag;
         RMT_mem[logical_reg]->rmt_valid = 1;
-        RMT_mem[logical_reg]->ready_in_rob = 0;
+        //RMT_mem[logical_reg]->ready_in_rob = 0;
     }
     void return_operands(REG op_reg1, REG op_reg2, BYTE &rd_rob1, BYTE &rd_rob2, WORD &tag1, WORD &tag2)
     {
@@ -94,6 +94,22 @@ class RMT
     void ready_rob_bit(REG logical_reg)
     {
         RMT_mem[logical_reg]->ready_in_rob = 1;
+    }
+    void ready_rob_bit_0(REG logical_reg)
+    {
+        RMT_mem[logical_reg]->ready_in_rob = 0;
+    }    
+    void print_RMT()
+    {
+        int i = 0;
+        for(i = 0; i<32; i++)
+        {    
+            std::cout<<"RMT#"<<i<<std::endl;
+            std::cout<<"Register Binding : "<<(int)RMT_mem[i]->REG_MAP<<std::endl;
+            std::cout<<"Valid : "<<(int)RMT_mem[i]->rmt_valid<<std::endl;
+            std::cout<<"Ready in ROB : "<<(int)RMT_mem[i]->ready_in_rob<<std::endl;
+            std::cout<<std::endl;
+        }
     }
 
 };
