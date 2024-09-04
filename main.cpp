@@ -43,14 +43,6 @@ struct CPU_STAGE
     }
 };
 
-struct MEMORY
-{
-    WORD data_mem[4096];
-    WORD insn_mem[256];
-
-    long long program_end; // end of the program
-
-};
 
 struct CPU
 {   
@@ -114,11 +106,13 @@ STORE_QUEUE sq(4);
 RMT rmt;
 
 
+// Bypassing the Value from 
+
 void retire()
 {
     std::cout<<"\n========RETIRE==========\n";
     // Nothing to commit
-    if(rob.peek_head() == nullptr)
+    if(/*rob.peek_head() == nullptr*/1)
     {
         std::cout<<"\n No Payload to retire\n";
         std::cout<<"\n===========================\n";
@@ -148,7 +142,7 @@ void retire()
         std::cout<<"\n REG : "<<retire_payload->logical_reg<<std::endl;
         std::cout<<"\n VALUE : "<<retire_payload->VALUE<<std::endl;
         cpu.X[retire_payload->logical_reg] = retire_payload->VALUE;
-        rmt.ready_rob_bit_0(retire_payload->logical_reg);
+        //rmt.ready_rob_bit_0(retire_payload->logical_reg);
     }
     else 
     {
@@ -240,6 +234,7 @@ void integer_execute()
     CPU_STAGE *fu = cpu.integer_op;
 
     // The value broadcasted on the common data bus (CDB)
+
     int_fu(fu->insn,fu->PC, fu->r1_data, fu->r2_data, &(fu->output_alu));
     std::cout<<"\nAns : "<<fu->output_alu<<std::endl;
     std::cout<<"\nROB_TAG INTEGER EXECUTE: "<<(int)fu->wsel<<std::endl;
@@ -313,17 +308,25 @@ void dispatch()
     WORD val1 = NULL,val2 = NULL;
     BYTE wk1 = 0, wk2 = 0;
 
-    if(rd_rob1 == 0)
+    std::cout<<"\nread_ROB_1 = "<<(int)rd_rob1<<std::endl;
+    std::cout<<"\nread_ROB_2 = "<<(int)rd_rob2<<std::endl;
+
+    if(rd_rob1 == 1)
+    {
+        val1 = rob.read_val(src_t1);
+        std::cout<<"\nVAL1 = "<<val1<<std::endl;
+        wk1 = 1;
+    }
+    else if(rd_rob1 == 0)
     {
         val1 = cpu.X[dispatch_p->r1_sel];
         std::cout<<"\nVAL1 = "<<val1<<std::endl;
         wk1 = 1;
     }
-    else if(rd_rob1 == 1)
+    else if(rd_rob2 == 2)
     {
-        val1 = rob.read_val(src_t1);
-        std::cout<<"\nVAL1 = "<<val1<<std::endl;
-        wk1 = 1;
+        wk1 = 0;
+
     }
     
     if(rd_rob2 == 0)
@@ -399,7 +402,7 @@ int main(int argc, char **argv)
     int i = 0;
     cpu.PC = 0;
     cpu.NEXT_PC = 0;
-    while(i<9)
+    while(i<40)
     {   
         std::cout<<"\n******************************************\n";
         std::cout<<"\nCYCLE : "<<i<<std::endl;
@@ -416,10 +419,13 @@ int main(int argc, char **argv)
         //     std::cout<<"PC = "<<cpu.commit_op_int->insn;
         i++;
         std::cout<<"\n******************************************\n";
+
     }
+    
     rob.print_ROB();
     rmt.print_RMT();
     cpu.print_regfile();
+    iq.print_iq();
 
     return 0;
 }

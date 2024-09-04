@@ -53,6 +53,8 @@ void int_fu(WORD insn, REG PC, WORD r1_data, WORD r2_data, WORD *result)
             {
                 case ADDI :
                 {   
+                    std::cout<<"\nOp1 : "<<r1_data<<std::endl;
+                    std::cout<<"\nOp2 : "<<(int)sext(insn,20)<<std::endl;
                     *result = r1_data + sext(insn,20);
                     break;
                 }

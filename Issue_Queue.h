@@ -127,6 +127,8 @@ class ISSUE_QUEUE
                 }
                 return issue_pkt;
             }
+
+            
         }
 
         return nullptr;

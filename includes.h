@@ -1,6 +1,9 @@
 #ifndef _INCLUDES_
 #define _INCLUDES_
 
+#include <iostream>
+
+
 #include "datatypes.h"
 
 // void decoder(WORD ,BYTE *, BYTE *, BYTE *, BYTE *, 
@@ -113,5 +116,16 @@ int stall_lq;
 int stall_sq;
 
 uint64_t lsq_age_cnt = 0;
+
+struct MEMORY
+{
+    WORD data_mem[4096];
+    WORD insn_mem[256];
+
+    long long program_end; // end of the program
+
+};
+
+MEMORY memory;
 
 #endif

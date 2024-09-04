@@ -113,8 +113,12 @@ CYCLE : 2
 
 ========DISPATCH==========
 ROB TAG :0
-SRC_T1: 32722
-SRC_T2: 3299434912
+SRC_T1: 32696
+SRC_T2: 1023480224
+
+read_ROB_1 = 0
+
+read_ROB_2 = 0
 
 VAL1 = 0
 
@@ -154,8 +158,7 @@ CYCLE : 3
 
 ========RETIRE==========
 
- NOT COMPLETE TO RETIRE
-
+ No Payload to retire
 
 ===========================
 
@@ -179,7 +182,11 @@ ROB_TAG INTEGER ISSUE: 0
 ========DISPATCH==========
 ROB TAG :1
 SRC_T1: 0
-SRC_T2: 2988403904
+SRC_T2: 63899936
+
+read_ROB_1 = 2
+
+read_ROB_2 = 0
 
 VAL1 = 0
 
@@ -217,8 +224,7 @@ CYCLE : 4
 
 ========RETIRE==========
 
- NOT COMPLETE TO RETIRE
-
+ No Payload to retire
 
 ===========================
 
@@ -229,6 +235,10 @@ CYCLE : 4
 ===========================
 
 ========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
 
 Ans : 2
 
@@ -244,7 +254,11 @@ ROB_TAG INTEGER ISSUE: 1
 ========DISPATCH==========
 ROB TAG :2
 SRC_T1: 1
-SRC_T2: 2988403904
+SRC_T2: 63899936
+
+read_ROB_1 = 2
+
+read_ROB_2 = 0
 
 VAL1 = 0
 
@@ -282,8 +296,7 @@ CYCLE : 5
 
 ========RETIRE==========
 
- NOT COMPLETE TO RETIRE
-
+ No Payload to retire
 
 ===========================
 
@@ -293,6 +306,10 @@ Destination Register (Commit) :2
 ===========================
 
 ========INT_FU==========
+
+Op1 : 2
+
+Op2 : 2
 
 Ans : 4
 
@@ -308,7 +325,11 @@ ROB_TAG INTEGER ISSUE: 2
 ========DISPATCH==========
 ROB TAG :3
 SRC_T1: 2
-SRC_T2: 2988403904
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
 
 VAL1 = 0
 
@@ -348,9 +369,7 @@ CYCLE : 6
 
 ========RETIRE==========
 
- REG : 2
-
- VALUE : 2
+ No Payload to retire
 
 ===========================
 
@@ -360,6 +379,10 @@ Destination Register (Commit) :2
 ===========================
 
 ========INT_FU==========
+
+Op1 : 4
+
+Op2 : 2
 
 Ans : 6
 
@@ -375,7 +398,11 @@ ROB_TAG INTEGER ISSUE: 3
 ========DISPATCH==========
 ROB TAG :4
 SRC_T1: 3
-SRC_T2: 2988403904
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
 
 VAL1 = 0
 
@@ -415,9 +442,7 @@ CYCLE : 7
 
 ========RETIRE==========
 
- REG : 2
-
- VALUE : 4
+ No Payload to retire
 
 ===========================
 
@@ -427,6 +452,10 @@ Destination Register (Commit) :2
 ===========================
 
 ========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
 
 Ans : 2
 
@@ -442,7 +471,11 @@ ROB_TAG INTEGER ISSUE: 4
 ========DISPATCH==========
 ROB TAG :5
 SRC_T1: 4
-SRC_T2: 2988403904
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
 
 VAL1 = 0
 
@@ -482,9 +515,7 @@ CYCLE : 8
 
 ========RETIRE==========
 
- REG : 2
-
- VALUE : 6
+ No Payload to retire
 
 ===========================
 
@@ -494,6 +525,10 @@ Destination Register (Commit) :2
 ===========================
 
 ========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
 
 Ans : 2
 
@@ -509,7 +544,11 @@ ROB_TAG INTEGER ISSUE: 5
 ========DISPATCH==========
 ROB TAG :6
 SRC_T1: 5
-SRC_T2: 2988403904
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
 
 VAL1 = 0
 
@@ -542,38 +581,3649 @@ WK2: 1
 ===========================
 
 ******************************************
-ROB#3
-Complete : 1
-Valid : 1
-PC : 4
-OPCODE : 0
-LOGICAL REG : 2
-VALUE : 2
 
-ROB#4
-Complete : 0
-Valid : 1
-PC : 5
-OPCODE : 0
-LOGICAL REG : 2
-VALUE : 0
+******************************************
 
-ROB#5
-Complete : 0
-Valid : 1
-PC : 6
-OPCODE : 0
-LOGICAL REG : 2
-VALUE : 0
+CYCLE : 9
 
-ROB#6
-Complete : 0
-Valid : 1
-PC : 7
-OPCODE : 0
-LOGICAL REG : 2
-VALUE : 0
+========RETIRE==========
 
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 5
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 6
+===========================
+
+========DISPATCH==========
+ROB TAG :7
+SRC_T1: 6
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 8
+INSN: 2162963
+OPCODE: 0
+DEST: 7
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 10
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 6
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 7
+===========================
+
+========DISPATCH==========
+ROB TAG :8
+SRC_T1: 7
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 9
+INSN: 2162963
+OPCODE: 0
+DEST: 8
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 11
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 7
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 8
+===========================
+
+========DISPATCH==========
+ROB TAG :9
+SRC_T1: 8
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 10
+INSN: 2162963
+OPCODE: 0
+DEST: 9
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 12
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 8
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 9
+===========================
+
+========DISPATCH==========
+ROB TAG :10
+SRC_T1: 9
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 11
+INSN: 2162963
+OPCODE: 0
+DEST: 10
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 13
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 9
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 10
+===========================
+
+========DISPATCH==========
+ROB TAG :11
+SRC_T1: 10
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 12
+INSN: 2162963
+OPCODE: 0
+DEST: 11
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 14
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 10
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 11
+===========================
+
+========DISPATCH==========
+ROB TAG :12
+SRC_T1: 11
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 13
+INSN: 2162963
+OPCODE: 0
+DEST: 12
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 15
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 11
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 12
+===========================
+
+========DISPATCH==========
+ROB TAG :13
+SRC_T1: 12
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 14
+INSN: 2162963
+OPCODE: 0
+DEST: 13
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 16
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 12
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 13
+===========================
+
+========DISPATCH==========
+ROB TAG :14
+SRC_T1: 13
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 15
+INSN: 2162963
+OPCODE: 0
+DEST: 14
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 17
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 13
+
+===========================
+
+========ISSUE==========
+
+ROB_TAG INTEGER ISSUE: 14
+===========================
+
+========DISPATCH==========
+ROB TAG :15
+SRC_T1: 14
+SRC_T2: 63899936
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 18
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :16
+SRC_T1: 15
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 19
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :17
+SRC_T1: 16
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 20
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :18
+SRC_T1: 17
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 21
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :19
+SRC_T1: 18
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 22
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :20
+SRC_T1: 19
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 23
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :21
+SRC_T1: 20
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 24
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :22
+SRC_T1: 21
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 23
+INSN: 2162963
+OPCODE: 0
+DEST: 22
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 25
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :23
+SRC_T1: 22
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 23
+INSN: 2162963
+OPCODE: 0
+DEST: 22
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 24
+INSN: 2162963
+OPCODE: 0
+DEST: 23
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 26
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :24
+SRC_T1: 23
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 23
+INSN: 2162963
+OPCODE: 0
+DEST: 22
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 24
+INSN: 2162963
+OPCODE: 0
+DEST: 23
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 25
+INSN: 2162963
+OPCODE: 0
+DEST: 24
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 27
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :25
+SRC_T1: 24
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 23
+INSN: 2162963
+OPCODE: 0
+DEST: 22
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 24
+INSN: 2162963
+OPCODE: 0
+DEST: 23
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 25
+INSN: 2162963
+OPCODE: 0
+DEST: 24
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 26
+INSN: 2162963
+OPCODE: 0
+DEST: 25
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 28
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :26
+SRC_T1: 25
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 23
+INSN: 2162963
+OPCODE: 0
+DEST: 22
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 24
+INSN: 2162963
+OPCODE: 0
+DEST: 23
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 25
+INSN: 2162963
+OPCODE: 0
+DEST: 24
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 26
+INSN: 2162963
+OPCODE: 0
+DEST: 25
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 27
+INSN: 2162963
+OPCODE: 0
+DEST: 26
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 29
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :27
+SRC_T1: 26
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 23
+INSN: 2162963
+OPCODE: 0
+DEST: 22
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 24
+INSN: 2162963
+OPCODE: 0
+DEST: 23
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 25
+INSN: 2162963
+OPCODE: 0
+DEST: 24
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 26
+INSN: 2162963
+OPCODE: 0
+DEST: 25
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 27
+INSN: 2162963
+OPCODE: 0
+DEST: 26
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 28
+INSN: 2162963
+OPCODE: 0
+DEST: 27
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 30
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :28
+SRC_T1: 27
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 23
+INSN: 2162963
+OPCODE: 0
+DEST: 22
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 24
+INSN: 2162963
+OPCODE: 0
+DEST: 23
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 25
+INSN: 2162963
+OPCODE: 0
+DEST: 24
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 26
+INSN: 2162963
+OPCODE: 0
+DEST: 25
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 27
+INSN: 2162963
+OPCODE: 0
+DEST: 26
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 28
+INSN: 2162963
+OPCODE: 0
+DEST: 27
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 29
+INSN: 2162963
+OPCODE: 0
+DEST: 28
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 31
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :29
+SRC_T1: 28
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+PC: 16
+INSN: 2162963
+OPCODE: 0
+DEST: 15
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 17
+INSN: 2162963
+OPCODE: 0
+DEST: 16
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 18
+INSN: 2162963
+OPCODE: 0
+DEST: 17
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 19
+INSN: 2162963
+OPCODE: 0
+DEST: 18
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 20
+INSN: 2162963
+OPCODE: 0
+DEST: 19
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 21
+INSN: 2162963
+OPCODE: 0
+DEST: 20
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 22
+INSN: 2162963
+OPCODE: 0
+DEST: 21
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 23
+INSN: 2162963
+OPCODE: 0
+DEST: 22
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 24
+INSN: 2162963
+OPCODE: 0
+DEST: 23
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 25
+INSN: 2162963
+OPCODE: 0
+DEST: 24
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 26
+INSN: 2162963
+OPCODE: 0
+DEST: 25
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 27
+INSN: 2162963
+OPCODE: 0
+DEST: 26
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 28
+INSN: 2162963
+OPCODE: 0
+DEST: 27
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 29
+INSN: 2162963
+OPCODE: 0
+DEST: 28
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+PC: 30
+INSN: 2162963
+OPCODE: 0
+DEST: 29
+OP1 TAG: 18446744073709551615
+OP2 TAG: 18446744073709551615
+OP VAL1: 0
+OP VAL2: 0
+R1_RE: 1
+R2_RE: 0
+REGF_WE: 1
+WK1: 1
+WK2: 1	
+
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 32
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :30
+SRC_T1: 29
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 33
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :31
+SRC_T1: 30
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 34
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :-1
+SRC_T1: 31
+SRC_T2: 63899648
+
+read_ROB_1 = 1
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 35
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :-1
+SRC_T1: 32696
+SRC_T2: 63899648
+
+read_ROB_1 = 0
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 36
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :-1
+SRC_T1: 32696
+SRC_T2: 63899648
+
+read_ROB_1 = 0
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 37
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :-1
+SRC_T1: 32696
+SRC_T2: 63899648
+
+read_ROB_1 = 0
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 38
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :-1
+SRC_T1: 32696
+SRC_T2: 63899648
+
+read_ROB_1 = 0
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
+
+******************************************
+
+CYCLE : 39
+
+========RETIRE==========
+
+ No Payload to retire
+
+===========================
+
+========COMMIT==========
+Register Value (Commit) :2
+Destination Register (Commit) :2
+===========================
+
+========INT_FU==========
+
+Op1 : 0
+
+Op2 : 2
+
+Ans : 2
+
+ROB_TAG INTEGER EXECUTE: 14
+
+===========================
+
+========ISSUE==========
+
+ No Issue Ready
+
+===========================
+
+========DISPATCH==========
+ROB TAG :-1
+SRC_T1: 32696
+SRC_T2: 63899648
+
+read_ROB_1 = 0
+
+read_ROB_2 = 0
+
+VAL1 = 0
+
+VAL1 = 0
+
+wakeup1 = 1
+
+wakeup2 = 1
+
+===========================
+
+========DECODE==========
+
+ IMM_INSN
+
+===========================
+
+******************************************
 RMT#0
 Register Binding : -1
 Valid : 0
@@ -585,7 +4235,7 @@ Valid : 0
 Ready in ROB : 0
 
 RMT#2
-Register Binding : 6
+Register Binding : -1
 Valid : 1
 Ready in ROB : 1
 
@@ -738,7 +4388,7 @@ Ready in ROB : 0
 REGFILE STATE
 X0=0
 X1=0
-X2=6
+X2=0
 X3=0
 X4=0
 X5=0
