@@ -72,6 +72,7 @@ class ROB{
         else 
         {
             // Adding the entry to ROB
+            // std::cout<<"\ntail of rob queue: "<<tail;
             stall_rob = 0;
             ROB_QUEUE[tail].valid = 1;
             ROB_QUEUE[tail].PC = PC;
@@ -85,16 +86,18 @@ class ROB{
                 tail = 0;
                 tail_wrap = !tail_wrap;
             }
-
+            // std::cout<<"\nROB pointer in class: "<<rob_pointer;
             return rob_pointer;
         }
     }
     WORD read_val(WORD rob_tag)
     {
+        std::cout<< "\nROB VALUE : "<< ROB_QUEUE[rob_tag].VALUE<<std::endl;
         return ROB_QUEUE[rob_tag].VALUE;
     }
     REG deposit_value(WORD rob_addr, WORD value)
     {
+        
         ROB_QUEUE[rob_addr].VALUE = value;
         ROB_QUEUE[rob_addr].complete = 1;
         return ROB_QUEUE[rob_addr].logical_reg;

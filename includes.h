@@ -126,6 +126,6 @@ struct MEMORY
 
 };
 
-MEMORY memory;
+MEMORY memory_obj;
 
 #endif

@@ -314,13 +314,13 @@ void dispatch()
     if(rd_rob1 == 1)
     {
         val1 = rob.read_val(src_t1);
-        std::cout<<"\nVAL1 = "<<val1<<std::endl;
+        std::cout<<"\nROB VAL1 = "<<val1<<std::endl;
         wk1 = 1;
     }
     else if(rd_rob1 == 0)
     {
         val1 = cpu.X[dispatch_p->r1_sel];
-        std::cout<<"\nVAL1 = "<<val1<<std::endl;
+        std::cout<<"\nREG VAL1 = "<<val1<<std::endl;
         wk1 = 1;
     }
     else if(rd_rob2 == 2)
@@ -332,13 +332,13 @@ void dispatch()
     if(rd_rob2 == 0)
     {
         val2 = cpu.X[dispatch_p->r2_sel];
-        std::cout<<"\nVAL1 = "<<val2<<std::endl;
+        std::cout<<"\nVAL2 = "<<val2<<std::endl;
         wk2 = 1;
     }
     else if(rd_rob2 == 1)
     {
         val2 = rob.read_val(src_t2);
-        std::cout<<"\nVAL1 = "<<val2<<std::endl;
+        std::cout<<"\nVAL2 = "<<val2<<std::endl;
         wk2 = 1;
     }
     
@@ -357,6 +357,9 @@ void dispatch()
                    dispatch_p->regfile_we);
     
     iq.print_iq();
+
+    std::cout<<"\nRMT State\n";
+    rmt.print_RMT();
 
     std::cout<<"\n===========================\n";
 
@@ -402,7 +405,7 @@ int main(int argc, char **argv)
     int i = 0;
     cpu.PC = 0;
     cpu.NEXT_PC = 0;
-    while(i<40)
+    while(i<10)
     {   
         std::cout<<"\n******************************************\n";
         std::cout<<"\nCYCLE : "<<i<<std::endl;
@@ -415,15 +418,13 @@ int main(int argc, char **argv)
         dispatch();
         decode();
         fetch();
-        // if(i == 19)
-        //     std::cout<<"PC = "<<cpu.commit_op_int->insn;
         i++;
         std::cout<<"\n******************************************\n";
 
     }
     
     rob.print_ROB();
-    rmt.print_RMT();
+    //rmt.print_RMT();
     cpu.print_regfile();
     iq.print_iq();
 
